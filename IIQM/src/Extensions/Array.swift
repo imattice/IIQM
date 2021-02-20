@@ -8,8 +8,8 @@
 
 import Foundation
 
-//return double
-//can also extend to doubles?
+//TODO: - return double
+//TODO: - can also extend to doubles?
 extension Array where Element == Int {
     ///Returns the average value of the array using standard rounding
     public func mean() -> Int {
@@ -19,9 +19,12 @@ extension Array where Element == Int {
     
     ///Returns the average value of the middle 50% of the array
     public func interquartileMean() -> Int {
-        return 0
+        var midQ = self
+            midQ.removeInterquartileBounds()
+        return midQ.mean()
     }
     
+    //TODO: Remove mutating function to prevent the interquartile method from needing to be mutating
     ///Removes the highest and lowest 25% of values
     mutating func removeInterquartileBounds() {
         self.sort()
