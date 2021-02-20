@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1283397125E1BB9A00A5C958 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283397025E1BB9A00A5C958 /* ArrayTests.swift */; };
+		1283398325E1C2AD00A5C958 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283398225E1C2AD00A5C958 /* Array.swift */; };
 		F9BD803A20D47CC500FC82EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803920D47CC500FC82EE /* AppDelegate.swift */; };
 		F9BD803C20D47CC500FC82EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803B20D47CC500FC82EE /* ViewController.swift */; };
 		F9BD803F20D47CC500FC82EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD803D20D47CC500FC82EE /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1283397025E1BB9A00A5C958 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
+		1283398225E1C2AD00A5C958 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		F974951120D4863100D9D6E8 /* Code Challenge - Crunching Large Data Sets.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Code Challenge - Crunching Large Data Sets.md"; sourceTree = "<group>"; };
 		F9BD803620D47CC500FC82EE /* IIQM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IIQM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BD803920D47CC500FC82EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 				1283397025E1BB9A00A5C958 /* ArrayTests.swift */,
 			);
 			path = "Extension Tests";
+			sourceTree = "<group>";
+		};
+		1283398125E1C29E00A5C958 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1283398225E1C2AD00A5C958 /* Array.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F9A3A62820D483D70094767D /* ui */ = {
@@ -120,6 +130,7 @@
 				F9BD803920D47CC500FC82EE /* AppDelegate.swift */,
 				F9BD803B20D47CC500FC82EE /* ViewController.swift */,
 				F9BD805B20D47D3F00FC82EE /* iiqm.swift */,
+				1283398125E1C29E00A5C958 /* Extensions */,
 			);
 			name = src;
 			path = IIQM/src;
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9BD805E20D47D3F00FC82EE /* iiqm.swift in Sources */,
+				1283398325E1C2AD00A5C958 /* Array.swift in Sources */,
 				F9BD803C20D47CC500FC82EE /* ViewController.swift in Sources */,
 				F9BD803A20D47CC500FC82EE /* AppDelegate.swift in Sources */,
 			);
@@ -413,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNA55J4REY;
 				INFOPLIST_FILE = "$(SRCROOT)/IIQM/res/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -431,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNA55J4REY;
 				INFOPLIST_FILE = "$(SRCROOT)/IIQM/res/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -450,6 +464,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNA55J4REY;
 				INFOPLIST_FILE = IIQMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -471,6 +486,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNA55J4REY;
 				INFOPLIST_FILE = IIQMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (

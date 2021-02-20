@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         let iiqm = IIQM()
-        iiqm.calculate(path: Bundle.main.path(forResource: "data", ofType: "txt")!)
+//        iiqm.calculate(path: Bundle.main.path(forResource: "data", ofType: "txt")!)
     }
 
 

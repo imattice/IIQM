@@ -28,13 +28,6 @@ class InterquartileMeanCalculator {
     }
 }
 
-extension Array where Element == Int {
-    ///Returns the average value of the array
-    public func mean() -> Int {
-        return 0
-    }
-}
-
 
 
 
