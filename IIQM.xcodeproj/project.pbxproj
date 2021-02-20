@@ -67,14 +67,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1283397625E1BBA100A5C958 /* Extension Tests */ = {
-			isa = PBXGroup;
-			children = (
-				1283397025E1BB9A00A5C958 /* ArrayTests.swift */,
-			);
-			path = "Extension Tests";
-			sourceTree = "<group>";
-		};
 		1283398125E1C29E00A5C958 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				F9BD804E20D47CC800FC82EE /* IIQMTests.swift */,
+				1283397025E1BB9A00A5C958 /* ArrayTests.swift */,
 				F9BD805020D47CC800FC82EE /* Info.plist */,
-				1283397625E1BBA100A5C958 /* Extension Tests */,
 			);
 			path = IIQMTests;
 			sourceTree = "<group>";

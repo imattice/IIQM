@@ -28,4 +28,28 @@ class ArrayTests: XCTestCase {
         XCTAssertEqual(largeValues.mean(),  245,    "Mean of large values is incorrect")
 
     }
+    
+    func testRemoveInterquartileBounds() {
+        var zero = [0, 0, 0]
+        zero.removeInterquartileBounds()
+        
+        XCTAssertEqual(zero, [Int](), "Failed to remove interquartile bounds of empty array")
+        
+        var sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        sorted.removeInterquartileBounds()
+        
+        XCTAssertEqual(sorted, [3, 4, 5, 6, 7], "Failed to remove interquartile bounds of sorted array")
+
+        
+        var simple = [10,  8,  2,  3,  1]
+        simple.removeInterquartileBounds()
+        
+        XCTAssertEqual(simple, [2, 3, 8], "Failed to remove interquartile bounds of simple array")
+
+        
+        var complex = [93,  291,  205,  572,  175,  484,  456,  569,  33,  192,  245,  331,  126,  340,  424,  238,  156,  564,  516,  345,  195,  422,  10,  433,  112]
+        complex.removeInterquartileBounds()
+        
+        XCTAssertEqual(complex, [175, 192, 195, 205, 238, 245, 291, 331, 340, 345, 422, 424, 433], "Failed to remove interquartile bounds of complex array")
+    }
 }

@@ -15,5 +15,16 @@ extension Array where Element == Int {
         //not sure if I want this function to be optional just to handle the case of an empty array
         //could also throw an error
         guard !self.isEmpty else { return 0 }
-        return self.reduce(0) { $0 + $1 } / self.count    }
+        return self.reduce(0) { $0 + $1 } / self.count
+    }
+    
+    ///Returns the average value of the middle 50% of the array
+    public func interquartileMean() -> Int {
+        return 0
+    }
+    
+    ///Removes the highest and lowest 25% of values
+    mutating func removeInterquartileBounds() {
+        
+    }
 }

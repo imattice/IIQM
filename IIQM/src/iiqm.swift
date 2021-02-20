@@ -28,10 +28,9 @@ class InterquartileMeanCalculator {
     }
 }
 
-
-
-
-
+class TextReader {
+    
+}
 
 
 class IIQM {
