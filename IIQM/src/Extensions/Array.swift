@@ -25,6 +25,11 @@ extension Array where Element == Int {
     
     ///Removes the highest and lowest 25% of values
     mutating func removeInterquartileBounds() {
+        self.sort()
+        let lowerIndex = Int(count*1/4)
+        let upperIndex = Int(count*3/4)
         
+        self = Array(self[lowerIndex...upperIndex])
     }
+    
 }
