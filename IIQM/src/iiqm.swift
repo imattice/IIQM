@@ -8,6 +8,39 @@
 
 import Foundation
 
+// Can we use recusion when new data is added?
+//mean function
+//remove upper and lower 25% function
+//extend array?
+
+
+class InterquartileMeanCalculator {
+    static func calculateMean(at path: String) {
+        
+    }
+    
+    private func calculateMean(_ data: [Int]) {
+        
+    }
+    
+    private func removeBounds() {
+        
+    }
+}
+
+extension Array where Element == Int {
+    ///Returns the average value of the array
+    public func mean() -> Int {
+        return 0
+    }
+}
+
+
+
+
+
+
+
 class IIQM {
     ///Calculates the sum of all values in the data.txt file
     func calculate(path: String) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1283397125E1BB9A00A5C958 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283397025E1BB9A00A5C958 /* ArrayTests.swift */; };
 		F9BD803A20D47CC500FC82EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803920D47CC500FC82EE /* AppDelegate.swift */; };
 		F9BD803C20D47CC500FC82EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803B20D47CC500FC82EE /* ViewController.swift */; };
 		F9BD803F20D47CC500FC82EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD803D20D47CC500FC82EE /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1283397025E1BB9A00A5C958 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		F974951120D4863100D9D6E8 /* Code Challenge - Crunching Large Data Sets.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Code Challenge - Crunching Large Data Sets.md"; sourceTree = "<group>"; };
 		F9BD803620D47CC500FC82EE /* IIQM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IIQM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BD803920D47CC500FC82EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1283397625E1BBA100A5C958 /* Extension Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1283397025E1BB9A00A5C958 /* ArrayTests.swift */,
+			);
+			path = "Extension Tests";
+			sourceTree = "<group>";
+		};
 		F9A3A62820D483D70094767D /* ui */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 			children = (
 				F9BD804E20D47CC800FC82EE /* IIQMTests.swift */,
 				F9BD805020D47CC800FC82EE /* Info.plist */,
+				1283397625E1BBA100A5C958 /* Extension Tests */,
 			);
 			path = IIQMTests;
 			sourceTree = "<group>";
@@ -249,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9BD804F20D47CC800FC82EE /* IIQMTests.swift in Sources */,
+				1283397125E1BB9A00A5C958 /* ArrayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
