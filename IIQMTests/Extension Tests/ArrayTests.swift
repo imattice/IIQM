@@ -16,7 +16,7 @@ class ArrayTests: XCTestCase {
         let empty = [Int]()
         let zero = [0, 0, 0]
         let single = [5]
-        let negative = [-10, -5, -5, -4, -4]
+        let negative = [-10, -5, -5, -4, -4, -10]
         let simpleValues = [10, 9, 6, 10, 2]
         let largeValues = [181, 270, 221, 232, 1, 129, 477, 140, 356, 95, 1, 1, 248, 292, 337, 273, 166, 509, 434, 223, 274, 282, 511, 309, 167]
         
