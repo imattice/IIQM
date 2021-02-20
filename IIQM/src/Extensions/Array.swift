@@ -8,12 +8,11 @@
 
 import Foundation
 
+//return double
+//can also extend to doubles?
 extension Array where Element == Int {
     ///Returns the average value of the array using standard rounding
     public func mean() -> Int {
-        //depending on what would be best for the application, we could, and probably should, return nil here
-        //not sure if I want this function to be optional just to handle the case of an empty array
-        //could also throw an error
         guard !self.isEmpty else { return 0 }
         return self.reduce(0) { $0 + $1 } / self.count
     }
