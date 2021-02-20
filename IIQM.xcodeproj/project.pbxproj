@@ -14,7 +14,6 @@
 		F9BD803F20D47CC500FC82EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD803D20D47CC500FC82EE /* Main.storyboard */; };
 		F9BD804120D47CC800FC82EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BD804020D47CC800FC82EE /* Assets.xcassets */; };
 		F9BD804420D47CC800FC82EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD804220D47CC800FC82EE /* LaunchScreen.storyboard */; };
-		F9BD804F20D47CC800FC82EE /* IIQMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD804E20D47CC800FC82EE /* IIQMTests.swift */; };
 		F9BD805C20D47D3F00FC82EE /* data-20k.txt in Resources */ = {isa = PBXBuildFile; fileRef = F9BD805920D47D3E00FC82EE /* data-20k.txt */; };
 		F9BD805D20D47D3F00FC82EE /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = F9BD805A20D47D3E00FC82EE /* data.txt */; };
 		F9BD805E20D47D3F00FC82EE /* iiqm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD805B20D47D3F00FC82EE /* iiqm.swift */; };
@@ -42,7 +41,6 @@
 		F9BD804320D47CC800FC82EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9BD804520D47CC800FC82EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9BD804A20D47CC800FC82EE /* IIQMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IIQMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9BD804E20D47CC800FC82EE /* IIQMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IIQMTests.swift; sourceTree = "<group>"; };
 		F9BD805020D47CC800FC82EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9BD805920D47D3E00FC82EE /* data-20k.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "data-20k.txt"; path = "IIQM/data/data-20k.txt"; sourceTree = SOURCE_ROOT; };
 		F9BD805A20D47D3E00FC82EE /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.txt; path = IIQM/data/data.txt; sourceTree = SOURCE_ROOT; };
@@ -109,7 +107,6 @@
 		F9BD804D20D47CC800FC82EE /* IIQMTests */ = {
 			isa = PBXGroup;
 			children = (
-				F9BD804E20D47CC800FC82EE /* IIQMTests.swift */,
 				1283397025E1BB9A00A5C958 /* ArrayTests.swift */,
 				F9BD805020D47CC800FC82EE /* Info.plist */,
 			);
@@ -263,7 +260,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9BD804F20D47CC800FC82EE /* IIQMTests.swift in Sources */,
 				1283397125E1BB9A00A5C958 /* ArrayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

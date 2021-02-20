@@ -33,12 +33,12 @@ class ArrayTests: XCTestCase {
         var zero = [0, 0, 0]
         zero.removeInterquartileBounds()
         
-        XCTAssertEqual(zero, [Int](), "Failed to remove interquartile bounds of empty array")
+        XCTAssertEqual(zero, [0, 0, 0], "Failed to remove interquartile bounds of empty array")
         
         var sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         sorted.removeInterquartileBounds()
         
-        XCTAssertEqual(sorted, [3, 4, 5, 6, 7], "Failed to remove interquartile bounds of sorted array")
+        XCTAssertEqual(sorted, [3, 4, 5, 6, 7, 8], "Failed to remove interquartile bounds of sorted array")
 
         
         var simple = [10,  8,  2,  3,  1]
