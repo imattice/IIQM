@@ -113,4 +113,31 @@ class ViewController: UIViewController {
             print("Index => \(index), Mean => \(meanString)")
         }
     }
+    
+    ///A test calculation for optimizing the calculation of Interquartile Mean
+    //This may be illegal based on point 3 in the optimization challenge brief: "still calculates the Incremental Interquartile Mean after each value is read"
+    //this gives us inaccurate data and does not speed up the calculation significantly.
+    func averageBatch() {
+        let batchSize: Int = 1000
+        var currentData = Array(data[0...3])
+        
+        for (index, value) in data.enumerated() {
+            if index < 4 { continue }
+            
+            currentData.append(value)
+
+//            //if the current data has gotten bigger than our batch size, aggregate the median values down to the mean
+            if currentData.count > batchSize {
+                //set the current data to the current q1, q3, and mean
+                currentData = [currentData[Int(currentData.count*1/4)],  currentData[Int(currentData.count*3/4)], currentData.interquartileMean()]
+            }
+            
+            let mean = currentData.interquartileMean()
+            let meanString = String(format: "%.2f", mean)
+            
+            print("Index => \(index), Mean => \(meanString)")
+        }
+        
+
+    }
 }
