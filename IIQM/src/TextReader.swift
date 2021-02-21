@@ -8,11 +8,9 @@
 
 import Foundation
 
-// Can we use recusion when new data is added?
-
 ///Used to simulate asynchronus data from a text file
 class TextReader {
-    func numericValues(from filename: String) throws -> [Int] {
+    func numericValues(from filename: String) throws -> [Double] {
         do {
             //locate the file in the app bundle
             guard let url = Bundle.main.url(forResource: filename, withExtension: "txt")
@@ -22,16 +20,16 @@ class TextReader {
             let contents = try String(contentsOf: url, encoding: .ascii).trimmingCharacters(in: .whitespacesAndNewlines)
             
             //convert the file from a String to an array of Int
-            let lines = contents.components(separatedBy: .newlines).map { Int($0)! }
+            let lines = contents.components(separatedBy: .newlines).map { Double($0)! }
             
             return lines
             
         } catch FileError.invalidFileName {
             print("Unable to read file: \(filename).txt")
-            return [Int]()
+            return [Double]()
         } catch {
             print(error)
-            return [Int]()
+            return [Double]()
         }
         
     }

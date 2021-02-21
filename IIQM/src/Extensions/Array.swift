@@ -8,30 +8,36 @@
 
 import Foundation
 
-//TODO: - return double
-//TODO: - can also extend to doubles?
-extension Array where Element == Int {
+extension Array where Element == Double {
     ///Returns the average value of the array using standard rounding
-    public func mean() -> Int {
+    public func mean() -> Double {
         guard !self.isEmpty else { return 0 }
-        return self.reduce(0) { $0 + $1 } / self.count
+        return self.reduce(0) { $0 + $1 } / Double(self.count)
     }
     
     ///Returns the average value of the middle 50% of the array
-    public func interquartileMean() -> Int {
-        var midQ = self
-            midQ.removeInterquartileBounds()
-        return midQ.mean()
+    public func interquartileMean() -> Double {
+//        var midQ = self
+//            midQ.removeInterquartileBounds()
+        return medianQuartileValues().mean()
     }
     
-    //TODO: Remove mutating function to prevent the interquartile method from needing to be mutating
     ///Removes the highest and lowest 25% of values
-    mutating func removeInterquartileBounds() {
-        self.sort()
+    func medianQuartileValues() -> [Double] {
         let lowerIndex = Int(count*1/4)
         let upperIndex = Int(count*3/4)
         
-        self = Array(self[lowerIndex...upperIndex])
+        return Array(self.sorted()[lowerIndex...upperIndex])
     }
+
+    
+//    ///Removes the highest and lowest 25% of values
+//    mutating func removeInterquartileBounds() {
+//        self.sort()
+//        let lowerIndex = Int(count*1/4)
+//        let upperIndex = Int(count*3/4)
+//
+//        self = Array(self[lowerIndex...upperIndex])
+//    }
     
 }
