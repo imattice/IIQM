@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var data = [Int]()
+    var data = [Double]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         self.data = data
         
-        simulateDataFlow()
+//        simulateDataFlow()
         
     }
     
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         //here is some code to show a UIAlert when the data is unavailable
     }
     
+    // Can we use recusion when new data is added?
     func simulateDataFlow() {
         //start with the interquartile mean for the first 4 values
         var currentMean = Array(data[0...3]).interquartileMean()
