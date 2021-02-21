@@ -12,16 +12,31 @@ import Foundation
 
 ///Used to simulate asynchronus data from a text file
 class TextReader {
-    func numericValues(from filename: String) -> [Int] {
-//        do {
-//            let contents:NSString = try NSString(contentsOfFile: path, encoding: String.Encoding.ascii.rawValue)
-//            let trimmed:String = contents.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-//            let lines:Array<String> =  NSString(string: trimmed).components(separatedBy: NSCharacterSet.newlines)
-//            return lines
-//        } catch {
-//            print("Unable to read file: \(path)")
-//            return [String]()
-//        }
-        return [Int]()
+    func numericValues(from filename: String) throws -> [Int] {
+        do {
+            //locate the file in the app bundle
+            guard let url = Bundle.main.url(forResource: filename, withExtension: "txt")
+            else { throw FileError.invalidFileName }
+           
+            //retrieve and format the contents of the file
+            let contents = try String(contentsOf: url, encoding: .ascii).trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            //convert the file from a String to an array of Int
+            let lines = contents.components(separatedBy: .newlines).map { Int($0)! }
+            
+            return lines
+            
+        } catch FileError.invalidFileName {
+            print("Unable to read file: \(filename).txt")
+            return [Int]()
+        } catch {
+            print(error)
+            return [Int]()
+        }
+        
     }
+}
+
+enum FileError: Error {
+    case invalidFileName
 }
