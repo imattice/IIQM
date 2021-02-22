@@ -6,24 +6,22 @@
 //  Copyright © 2021 Dexcom. All rights reserved.
 //
 
-//    PROBLEM - iterating over a long list of values takes too long
-//        - This appears to be because the methods used to get the IQ mean are initializing new arrays from array subslices and generating new arrays during sort
+//OPTIMIZATION
+//    PROBLEM: iterating over a long list of values takes too long
+//        - A large portion of time is used by initializing new arrays from array subslices and generating new arrays during sort.  We could significantly reduce the time by eliminating/reducing the use of sort and avoid creating as many arrays as possible
 //
-//    SOLUTIONS -
-//
+//    SOLUTIONS:
 //    1) Update and sort in batches
 //            This method reduces the number of calculations, but in the end doesn't save that much time. We lose the granularity of each iteration
-//
 //    2) Value aggregation
-//              We can reduce the size of the array by replacing the values with aggregate values.  This tradees off speed for accuracy.  This also still relies on sorting arrays after the aggregation occurs, which appears to be taking up most of the time.  If we are looking for exact, testable matches, this wouldn't be a good approach
-//
+//              We can reduce the size of the array by replacing the values with aggregate values.  It would be much faster to sort an array of only 4 values.  However, this tradees off speed for accuracy.  This also still relies on sorting arrays after the aggregation occurs, which may not cut down on that much time if it runs millions of times.  If we are looking for exact, testable matches, this wouldn't be a good approach.
 //    3) Store calculations as an index : mean key value pair, and then look up the value
-//              Would not scale well
-//
+//              Does not really address the issue of the mean calculation taking a long time.
 //    4) Progressive Sum
-//              We just keep track of the sum of the median quartile, which we can then use to find the mean value we are after
+//              We just keep track of the sum of the median quartile rather than all the individual values. We can then divide that sum by half to find the mean of the median quartile
 //              This would also mean that we would only be adding/subtracting at most 3 values at a time from the sum, avoiding having to sum up the entire median quartile over and over
-//              We will still need to track the values in the q1 and q3 in case the median quartile shifts in those directions, so keeping another array to hold each of those values would be necessary.  To avoid calling .sorted() each time a new value is added, we need to figure out at what index in our current array to insert the new values so that it stays sorted without (exessive?) looping or creating a new array.  Maybe some kind of search tree?
+//              There would still be a cost associated with keeping track of the q1 and q3 values in case the median quartile shifts in those directions.  These values would also need to stay sorted.
+//              To avoid calling .sorted() each time a new value is added, we need to figure out at what index in our current array to insert the new values so that it stays sorted without (exessive?) looping or creating a new array.  Maybe some kind of search tree?
 
 import Foundation
 
@@ -40,7 +38,7 @@ class IIQMCalculator {
             throw FileError.invalidFileName
         }
     }
-    
+    ///Calculates the Intermittent Interquartile Mean by keeping track of the sum of the median quartile
     func progressiveSum() {
         //Since we know we start with 4 values, we can calculate the initial sum from that part of the array
         var medianSum: Int = intermittentData[1...2].reduce(0, {$0 + $1})
@@ -116,10 +114,10 @@ class IIQMCalculator {
         }
     }
     
-    ///Calculates the Intermittent Interquartile Mean using aggregated data and batches
-    //This may be illegal based on point 3 in the optimization challenge brief: "still calculates the Incremental Interquartile Mean after each value is read"
+    //I don't think that this method fits the optimization challenge brief: "still calculates the Incremental Interquartile Mean after each value is read"
     //this gives us inaccurate data and does not speed up the calculation significantly.
     //enabling this function requires the Array extension to include Double values instead of/including Int
+//    ///Calculates the Intermittent Interquartile Mean using aggregated data and batches
 //    func averageBatch() {
 //        let batchSize: Int = 1000
 //        var currentData = Array(data[0...3])

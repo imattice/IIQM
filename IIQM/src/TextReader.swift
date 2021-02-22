@@ -21,6 +21,8 @@ class TextReader {
             
             //convert the file from a String to an array of Int
             let lines = contents.components(separatedBy: .newlines).map { Int($0)! }
+            //The txt file currently can be guaranteed to be all ints.  However, if other data types are a concern, we can add a guard here just to be safe.
+
             
             return lines
             

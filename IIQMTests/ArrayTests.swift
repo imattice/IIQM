@@ -33,6 +33,16 @@ class ArrayTests: XCTestCase {
         XCTAssertEqual(complex.mean(),      245.16,    "Mean of large values is incorrect")
     }
     
+    func testInterquartileMean() {
+        let sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        let simple = [14,  6,  4,  2,  17]
+        let complex = [335,  320,  28,  364,  485,  190,  592,  200,  264,  368,  439,  140,  259,  382,  493,  120,  294,  395,  406,  433,  95,  462,  173,  505,  325]
+        
+        XCTAssertEqual(sorted.interquartileMean(),  5.5,      "Could not calculate interquartile mean for sorted array")
+        XCTAssertEqual(simple.interquartileMean(),  8,      "Could not calculate interquartile mean for simple array")
+        XCTAssertEqual(complex.interquartileMean(), 334.2307692307692,    "Could not calculate interquartile mean for complex array")
+    }
+//    removed this test since we are no longer using this method
 //    func testRemoveInterquartileBounds() {
 //        let zero = [0.0, 0, 0]
 //
@@ -52,14 +62,4 @@ class ArrayTests: XCTestCase {
 //
 //        XCTAssertEqual(complex.medianQuartileValues(), [175, 192, 195, 205, 238, 245, 291, 331, 340, 345, 422, 424, 433], "Failed to remove interquartile bounds of complex array")
 //    }
-    
-    func testInterquartileMean() {
-        let sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let simple = [14,  6,  4,  2,  17]
-        let complex = [335,  320,  28,  364,  485,  190,  592,  200,  264,  368,  439,  140,  259,  382,  493,  120,  294,  395,  406,  433,  95,  462,  173,  505,  325]
-        
-        XCTAssertEqual(sorted.interquartileMean(),  5.5,      "Could not calculate interquartile mean for sorted array")
-        XCTAssertEqual(simple.interquartileMean(),  8,      "Could not calculate interquartile mean for simple array")
-        XCTAssertEqual(complex.interquartileMean(), 334.2307692307692,    "Could not calculate interquartile mean for complex array")
-    }
 }
