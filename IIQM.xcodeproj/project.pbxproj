@@ -11,6 +11,7 @@
 		1283398325E1C2AD00A5C958 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283398225E1C2AD00A5C958 /* Array.swift */; };
 		1283399125E1D5D800A5C958 /* TextReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283399025E1D5D800A5C958 /* TextReader.swift */; };
 		1283399525E1D74400A5C958 /* TextReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283399425E1D74400A5C958 /* TextReaderTests.swift */; };
+		128339AF25E36A0C00A5C958 /* IIQMCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128339AE25E36A0B00A5C958 /* IIQMCalculator.swift */; };
 		F9BD803A20D47CC500FC82EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803920D47CC500FC82EE /* AppDelegate.swift */; };
 		F9BD803C20D47CC500FC82EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD803B20D47CC500FC82EE /* ViewController.swift */; };
 		F9BD803F20D47CC500FC82EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD803D20D47CC500FC82EE /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		1283398225E1C2AD00A5C958 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		1283399025E1D5D800A5C958 /* TextReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReader.swift; sourceTree = "<group>"; };
 		1283399425E1D74400A5C958 /* TextReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderTests.swift; sourceTree = "<group>"; };
+		128339AE25E36A0B00A5C958 /* IIQMCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IIQMCalculator.swift; sourceTree = "<group>"; };
 		F974951120D4863100D9D6E8 /* Code Challenge - Crunching Large Data Sets.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Code Challenge - Crunching Large Data Sets.md"; sourceTree = "<group>"; };
 		F9BD803620D47CC500FC82EE /* IIQM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IIQM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BD803920D47CC500FC82EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				F9BD803920D47CC500FC82EE /* AppDelegate.swift */,
 				F9BD803B20D47CC500FC82EE /* ViewController.swift */,
+				128339AE25E36A0B00A5C958 /* IIQMCalculator.swift */,
 				F9BD805B20D47D3F00FC82EE /* iiqm.swift */,
 				1283399025E1D5D800A5C958 /* TextReader.swift */,
 				1283398125E1C29E00A5C958 /* Extensions */,
@@ -260,6 +263,7 @@
 				1283398325E1C2AD00A5C958 /* Array.swift in Sources */,
 				F9BD803C20D47CC500FC82EE /* ViewController.swift in Sources */,
 				F9BD803A20D47CC500FC82EE /* AppDelegate.swift in Sources */,
+				128339AF25E36A0C00A5C958 /* IIQMCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
