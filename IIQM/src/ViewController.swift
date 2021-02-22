@@ -11,19 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
-//        IIQM().calculate(path: "data-20k")
-        
-        guard let calculator = try? IIQMCalculator(filename: "data-2k")
+
+        guard let calculator = try? IIQMCalculator(filename: "data-20k")
         else { showDataFailureAlert(); return }
         
         calculator.arrayExtension()
 //        calculator.progressiveSum()
+        
+        //deprecated method
+//        IIQM().calculate(path: "data-20k")
     }
     
     func showDataFailureAlert() {
+        print("calculator intiialization failed; showing UIAlertController")
         //here is some code to show a UIAlert when the calculator cannot be initialized
-        print("failed")
     }
     
 //    PROBLEM - iterating over a long list of values takes too long
