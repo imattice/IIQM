@@ -9,24 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var data = [Int]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        guard let data = try? TextReader().numericValues(from: "data-20k")
-        else { showDataFailureAlert(); return }
-        
-        self.data = data
-                
+                        
 //        IIQM().calculate(path: "data-20k")
         
-//        progressiveSum()
-//        arrayExtension()
+        guard let calculator = try? IIQMCalculator(filename: "data-2k")
+        else { showDataFailureAlert(); return }
+        
+        calculator.arrayExtension()
+//        calculator.progressiveSum()
     }
     
     func showDataFailureAlert() {
-        //here is some code to show a UIAlert when the data is unavailable
+        //here is some code to show a UIAlert when the calculator cannot be initialized
+        print("failed")
     }
     
 //    PROBLEM - iterating over a long list of values takes too long

@@ -26,7 +26,7 @@ class TextReader {
             
         } catch FileError.invalidFileName {
             print("Unable to read file: \(filename).txt")
-            return [Int]()
+            throw FileError.invalidFileName
         } catch {
             print(error)
             return [Int]()

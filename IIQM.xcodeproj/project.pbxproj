@@ -50,7 +50,7 @@
 		F9BD805020D47CC800FC82EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9BD805920D47D3E00FC82EE /* data-20k.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "data-20k.txt"; path = "IIQM/data/data-20k.txt"; sourceTree = SOURCE_ROOT; };
 		F9BD805A20D47D3E00FC82EE /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.txt; path = IIQM/data/data.txt; sourceTree = SOURCE_ROOT; };
-		F9BD805B20D47D3F00FC82EE /* iiqm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iiqm.swift; path = IIQM/src/iiqm.swift; sourceTree = SOURCE_ROOT; };
+		F9BD805B20D47D3F00FC82EE /* iiqm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iiqm.swift; path = IIQM/src/Deprecated/iiqm.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +77,14 @@
 				1283398225E1C2AD00A5C958 /* Array.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		128339BF25E3723500A5C958 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				F9BD805B20D47D3F00FC82EE /* iiqm.swift */,
+			);
+			path = Deprecated;
 			sourceTree = "<group>";
 		};
 		F9A3A62820D483D70094767D /* ui */ = {
@@ -126,9 +134,9 @@
 				F9BD803920D47CC500FC82EE /* AppDelegate.swift */,
 				F9BD803B20D47CC500FC82EE /* ViewController.swift */,
 				128339AE25E36A0B00A5C958 /* IIQMCalculator.swift */,
-				F9BD805B20D47D3F00FC82EE /* iiqm.swift */,
 				1283399025E1D5D800A5C958 /* TextReader.swift */,
 				1283398125E1C29E00A5C958 /* Extensions */,
+				128339BF25E3723500A5C958 /* Deprecated */,
 			);
 			name = src;
 			path = IIQM/src;

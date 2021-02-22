@@ -12,13 +12,13 @@ import Foundation
 class IIQMCalculator {
     let data: [Int]
     
-    init(filename: String) {
+    init(filename: String) throws {
         do {
             self.data = try TextReader().numericValues(from: filename)
         }
-        catch {
-            print(error)
+        catch FileError.invalidFileName {
             self.data = [Int]()
+            throw FileError.invalidFileName
         }
     }
     
