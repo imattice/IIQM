@@ -8,10 +8,10 @@
 
 import Foundation
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Use IIQMCalculator instead")
 class IIQM {
     ///Calculates the sum of all values in the data.txt file
-    @available(*, deprecated, message: "Use Array<Double>.interquartileMean()")
+    @available(*, deprecated, message: "Use Array<Double>.interquartileMean() instead")
     func calculate(path: String) {
         let lines = readFile(path: path)
         var data: [Int] = []
@@ -48,7 +48,7 @@ class IIQM {
             }
         }
     }
-    @available(*, deprecated, message: "Use TextReader().numericValues(from filename)")
+    @available(*, deprecated, message: "Use TextReader().numericValues(from filename) instead")
     func readFile(path: String) -> Array<String> {
         do {
             let contents:NSString = try NSString(contentsOfFile: path, encoding: String.Encoding.ascii.rawValue)
