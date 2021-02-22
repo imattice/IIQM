@@ -6,13 +6,30 @@
 //  Copyright © 2021 Dexcom. All rights reserved.
 //
 
+//    PROBLEM - iterating over a long list of values takes too long
+//        - This appears to be because the methods used to get the IQ mean are initializing new arrays from array subslices and generating new arrays during sort
+//
+//    SOLUTIONS -
+//
+//    1) Update and sort in batches
+//            This method reduces the number of calculations, but in the end doesn't save that much time. We lose the granularity of each iteration
+//
+//    2) Value aggregation
+//              We can reduce the size of the array by replacing the values with aggregate values.  This tradees off speed for accuracy.  This also still relies on sorting arrays after the aggregation occurs, which appears to be taking up most of the time.  If we are looking for exact, testable matches, this wouldn't be a good approach
+//
+//    3) Store calculations as an index : mean key value pair, and then look up the value
+//              Would not scale well
+//
+//    4) Progressive Sum
+//              We just keep track of the sum of the median quartile, which we can then use to find the mean value we are after
+//              This would also mean that we would only be adding/subtracting at most 3 values at a time from the sum, avoiding having to sum up the entire median quartile over and over
+//              We will still need to track the values in the q1 and q3 in case the median quartile shifts in those directions, so keeping another array to hold each of those values would be necessary.  To avoid calling .sorted() each time a new value is added, we need to figure out at what index in our current array to insert the new values so that it stays sorted without (exessive?) looping or creating a new array.  Maybe some kind of search tree?
+
 import Foundation
 
 ///Used to calculate the Intermittent Interquartile Mean for a given file name
 class IIQMCalculator {
     let intermittentData: [Int]
-    let initialData = intermittentData[0...3]
-
     
     init(filename: String) throws {
         do {
@@ -34,16 +51,13 @@ class IIQMCalculator {
             if index < 4 { continue }
 
             //insert the new value into the array so that it stays sorted
-            var insertIndex = initialData.count //- 1//value >= initialData[initialData.count / 2] ? initialData.count / 2 : initialData.count - 1
-           
-
-            
-            
+            var insertIndex = recievedData.count
+        
             //TODO: - Test if building out a search tree would improve performance here
-            while insertIndex > 0 && value < initialData[insertIndex - 1] {
+            while insertIndex > 0 && value < recievedData[insertIndex - 1] {
                 insertIndex -= 1
             }
-            initialData.insert(value, at: insertIndex)
+            recievedData.insert(value, at: insertIndex)
             
             //            Search Tree Iteration - unfinished
             //            while insertIndex > 0 && value < initialData[insertIndex - 1] {
@@ -59,34 +73,30 @@ class IIQMCalculator {
             //            }
             
             ///The index at the end of the first quartile
-            let q1i = Int(initialData.count*1/4)
+            let q1i = Int(recievedData.count*1/4)
             ///The index at the end of the third quartile
-            let q3i = Int(initialData.count*3/4)
-            ///The sum of the q2 and q3 quartiles
-            let medianQ = initialData[q1i...q3i]
-            
-            
-            //This may be incorrect.  I'd want to study the pattern a bit more before settling on this
-            //the quartiles are recalculated on the even indexes
-            if index % 2 == 0 {
-                //if the value is in the median quartile, we can just add it to the sum
-                if value >= initialData[q1i] && value <= initialData[q3i] {
-                    medianSum  += value
-                }
-                
-                //the new value pushes the median towards q3
-                else if value < initialData[q1i] {
-                    medianSum -= initialData[q1i]
-                }
-                
-                //the new value pushes the median towards q1
-                else if value > initialData[q3i] {
-                    medianSum -= initialData[q1i]
-                }
+            let q3i = Int(recievedData.count*3/4)
+
+            //TODO: Test and verify the intended behavior here
+            //The following block is likely incorrect.  The goal is to update the median sum with the new value, as well as determine if anything needs to be subtracted from the median sum if the median quartile shifts towards q1 or q3.
+
+            //if the value is in the median quartile, we can just add it to the sum
+            if value >= recievedData[q1i] && value <= recievedData[q3i] {
+                medianSum  += value
             }
             
-            //return the middle value of the medianSum, which should represent the middle value of the median quartile
-            var interquartileMean: Double = Double(medianSum) / 2
+            //the new value pushes the median towards q3
+            else if value < recievedData[q1i] {
+                medianSum -= recievedData[q1i]
+            }
+            
+            //the new value pushes the median towards q1
+            else if value > recievedData[q3i] {
+                medianSum -= recievedData[q1i]
+            }
+            
+            //return the middle value of the medianSum
+            let interquartileMean: Double = Double(medianSum) / 2
 
             let meanString = String(format: "%.2f", interquartileMean)
             print("Index => \(index), Mean => \(meanString)")
