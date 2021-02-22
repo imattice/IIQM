@@ -8,17 +8,17 @@
 
 import Foundation
 
-extension Array where Element == Double {
+extension Array where Element == Int {
     ///Returns the average value of the array using standard rounding
     public func mean() -> Double {
         guard !self.isEmpty else { return 0 }
-        return self.reduce(0) { $0 + $1 } / Double(self.count)
+        return Double(self.reduce(0) { $0 + $1 }) / Double(self.count)
     }
     
     ///Returns the average value of the middle 50% of the array
     public func interquartileMean() -> Double {
         let midQ = self.sorted()[(count*1/4)...(count*3/4)]
-        return midQ.reduce(0) { $0 + $1 } / Double(midQ.count)
+        return Double(midQ.reduce(0) { $0 + $1 }) / Double(midQ.count)
     }
     
 //    ///Removes the highest and lowest 25% of values

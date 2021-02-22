@@ -17,12 +17,12 @@ import XCTest
 class ArrayTests: XCTestCase {
 
     func testMean() {
-        let empty = [Double]()
-        let zero = [0.0, 0.0, 0.0]
-        let single = [5.0]
-        let negative = [-10.0, -5.0, -5.0, -4.0, -4.0, -10.0]
-        let simple = [10.0, 9.0, 6.0, 10.0, 2.0]
-        let complex = [181.0, 270, 221, 232, 1, 129, 477, 140, 356, 95, 1, 1, 248, 292, 337, 273, 166, 509, 434, 223, 274, 282, 511, 309, 167]
+        let empty = [Int]()
+        let zero = [0, 0, 0]
+        let single = [5]
+        let negative = [-10, -5, -5, -4, -4, -10]
+        let simple = [10, 9, 6, 10, 2]
+        let complex = [181, 270, 221, 232, 1, 129, 477, 140, 356, 95, 1, 1, 248, 292, 337, 273, 166, 509, 434, 223, 274, 282, 511, 309, 167]
         
         XCTAssertEqual(empty.mean(),        0,      "Mean of empty array is invalid")
         XCTAssertEqual(zero.mean(),         0,      "Mean of an array of zeros is incorrect")
@@ -54,9 +54,9 @@ class ArrayTests: XCTestCase {
 //    }
     
     func testInterquartileMean() {
-        let sorted = [1.0, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let simple = [14.0,  6,  4,  2,  17]
-        let complex = [335.0,  320,  28,  364,  485,  190,  592,  200,  264,  368,  439,  140,  259,  382,  493,  120,  294,  395,  406,  433,  95,  462,  173,  505,  325]
+        let sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        let simple = [14,  6,  4,  2,  17]
+        let complex = [335,  320,  28,  364,  485,  190,  592,  200,  264,  368,  439,  140,  259,  382,  493,  120,  294,  395,  406,  433,  95,  462,  173,  505,  325]
         
         XCTAssertEqual(sorted.interquartileMean(),  5.5,      "Could not calculate interquartile mean for sorted array")
         XCTAssertEqual(simple.interquartileMean(),  8,      "Could not calculate interquartile mean for simple array")
