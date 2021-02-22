@@ -17,18 +17,17 @@ extension Array where Element == Double {
     
     ///Returns the average value of the middle 50% of the array
     public func interquartileMean() -> Double {
-//        var midQ = self
-//            midQ.removeInterquartileBounds()
-        return medianQuartileValues().mean()
+        let midQ = self.sorted()[(count*1/4)...(count*3/4)]
+        return midQ.reduce(0) { $0 + $1 } / Double(midQ.count)
     }
     
-    ///Removes the highest and lowest 25% of values
-    func medianQuartileValues() -> [Double] {
-        let lowerIndex = Int(count*1/4)
-        let upperIndex = Int(count*3/4)
-        
-        return Array(self.sorted()[lowerIndex...upperIndex])
-    }
+//    ///Removes the highest and lowest 25% of values
+//    func medianQuartileValues() -> [Double] {
+//        let lowerIndex = Int(count*1/4)
+//        let upperIndex = Int(count*3/4)
+//
+//        return Array(self.sorted()[lowerIndex...upperIndex])
+//    }
 
     
 //    ///Removes the highest and lowest 25% of values
