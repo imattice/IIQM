@@ -22,6 +22,8 @@
 //              This would also mean that we would only be adding/subtracting at most 3 values at a time from the sum, avoiding having to sum up the entire median quartile over and over
 //              There would still be a cost associated with keeping track of the q1 and q3 values in case the median quartile shifts in those directions.  These values would also need to stay sorted.
 //              To avoid calling .sorted() each time a new value is added, we need to figure out at what index in our current array to insert the new values so that it stays sorted without (exessive?) looping or creating a new array.  Maybe some kind of search tree?
+//   5) Hash Map
+//  The bounds of the data (0-600) can be used as indicies of an array and the values of the array can be used to count the instances of those values as new data comes in.  This limits the size of the array we need to work with to a maximum size of 600 integers.  This should significantly improve the speed at which the calculation can be run on extremely large data sets.
 
 import Foundation
 
@@ -29,79 +31,33 @@ import Foundation
 class IIQMCalculator {
     let intermittentData: [Int]
     
+    ///An array of counts where the index represent the value and the element represent the number of occurances in the data set
+    var hashMap = Array(repeating: 0, count: 601)
+    
+    var dictMap = [Int : Int]()
+
+    
     init(filename: String) throws {
         do {
             self.intermittentData = try TextReader().numericValues(from: filename)
+            for value in intermittentData {
+            addToHashMap(value: value)
+            }
         }
         catch FileError.invalidFileName {
             self.intermittentData = [Int]()
             throw FileError.invalidFileName
         }
     }
-    ///Calculates the Intermittent Interquartile Mean by keeping track of the sum of the median quartile
-    func progressiveSum() {
-        //Since we know we start with 4 values, we can calculate the initial sum from that part of the array
-        var medianSum: Int = intermittentData[1...2].reduce(0, {$0 + $1})
-        var recievedData = intermittentData[0...3]
-                
-        for (index, value) in intermittentData.enumerated() {
-            //ignore the first 4 values since the array is starting with those
-            if index < 4 { continue }
-
-            //insert the new value into the array so that it stays sorted
-            var insertIndex = recievedData.count
-        
-            //TODO: - Test if building out a search tree would improve performance here
-            while insertIndex > 0 && value < recievedData[insertIndex - 1] {
-                insertIndex -= 1
-            }
-            recievedData.insert(value, at: insertIndex)
-            
-            //            Search Tree Iteration - unfinished
-            //            while insertIndex > 0 && value < initialData[insertIndex - 1] {
-            //                if value < initialData[insertIndex] {
-            //                    insertIndex = insertIndex / 2
-            //                }
-            //                else {
-            //                    insertIndex = insertIndex
-            //                }
-            //                insertIndex = insertIndex / 2
-            //
-            //                insertIndex -= 1
-            //            }
-            
-            ///The index at the end of the first quartile
-            let q1i = Int(recievedData.count*1/4)
-            ///The index at the end of the third quartile
-            let q3i = Int(recievedData.count*3/4)
-
-            //TODO: Test and verify the intended behavior here
-            //The following block is likely incorrect.  The goal is to update the median sum with the new value, as well as determine if anything needs to be subtracted from the median sum if the median quartile shifts towards q1 or q3.
-
-            //if the value is in the median quartile, we can just add it to the sum
-            if value >= recievedData[q1i] && value <= recievedData[q3i] {
-                medianSum  += value
-            }
-            
-            //the new value pushes the median towards q3
-            else if value < recievedData[q1i] {
-                medianSum -= recievedData[q1i]
-            }
-            
-            //the new value pushes the median towards q1
-            else if value > recievedData[q3i] {
-                medianSum -= recievedData[q1i]
-            }
-            
-            //return the middle value of the medianSum
-            let interquartileMean: Double = Double(medianSum) / 2
-
-            let meanString = String(format: "%.2f", interquartileMean)
-            print("Index => \(index), Mean => \(meanString)")
+    
+    init(dataSet: [Int]) {
+        print(dataSet)
+        self.intermittentData = dataSet
+        for value in dataSet {
+        addToHashMap(value: value)
         }
-        
-
     }
+    
     
     ///Calculates the Intermittent Interquartile Mean using extensions from Array<Double>
     func arrayExtension() {
@@ -114,29 +70,97 @@ class IIQMCalculator {
         }
     }
     
-    //I don't think that this method fits the optimization challenge brief: "still calculates the Incremental Interquartile Mean after each value is read"
-    //this gives us inaccurate data and does not speed up the calculation significantly.
-    //enabling this function requires the Array extension to include Double values instead of/including Int
-//    ///Calculates the Intermittent Interquartile Mean using aggregated data and batches
-//    func averageBatch() {
-//        let batchSize: Int = 1000
-//        var currentData = Array(data[0...3])
-//
-//        for (index, value) in data.enumerated() {
-//            if index < 4 { continue }
-//
-//            currentData.append(value)
-//
-////            //if the current data has gotten bigger than our batch size, aggregate the median values down to the mean
-//            if currentData.count > batchSize {
-//                //set the current data to the current q1, q3, and mean
-//                currentData = [currentData[Int(currentData.count*1/4)],  currentData[Int(currentData.count*3/4)], currentData.interquartileMean()]
-//            }
-//
-//            let mean = currentData.interquartileMean()
-//            let meanString = String(format: "%.2f", mean)
-//
-//            print("Index => \(index), Mean => \(meanString)")
-//        }
-//    }
+    
+    //TODO: - Green test on cases where data set is not divisible by 4
+    //TODO: - Green test for cases where there are multiple values around the quartile
+    //TODO: - Refactor out repetitive code
+    //TODO: - Update challenge answers
+    
+    
+    func calculateFromHashMap() -> Double {
+        ///The number of objects in each quartile
+        let qSize: Double = Double(hashMap.filter { $0 != 0 }.reduce(0, +)) / 4.0
+        print("qSize: \(qSize)")
+        ///tracks the current iteration of values with counts
+        var iterationIndex: Double = 0
+        ///the sum of the values in the interquartile
+        var sum: Double = 0.0
+        ///The index of the inclusive lower bound of the interquartile
+        let lowerBound = floor(qSize)
+        ///The index of the inclusive upper bound of the interquartile
+        let upperBound = floor(qSize*3)
+        ///Tracks if the lower bound has been reached while iterating through the data set
+        var foundLowerBound = false
+        ///Tracks if the upper bound has been reached while iterating through the data set
+        var foundUpperbound = false
+        
+        //loop through the values in the hash map
+        //(O(1) as there will be 600 values in the worst case)
+        for (value, count) in hashMap.enumerated() {
+            //ignore the values that are not in the array
+            guard count != 0 else { continue }
+            
+            
+            //increase the index as we look at each value with an associated count by that count
+            iterationIndex += Double(count)
+            
+            //determine if the next count will bring the index into the fourth quartile
+            if iterationIndex >= upperBound && !foundUpperbound {
+
+                let iqCount = (iterationIndex - upperBound) + 1
+                print("upperBound value: \(value)");
+                print("index quartile difference: \(iqCount)");
+              
+                sum += Double(value)*iqCount
+                
+                //add any fractional value to the sum
+                
+                foundUpperbound = true
+                continue
+            }
+            
+            //determine if the next count will bring the index into the interquartile
+            if iterationIndex > lowerBound && !foundLowerBound {
+                //determine how many of the count belong to the interquartile
+                let iqCount = iterationIndex - lowerBound
+                print("lowerBound value: \(value)");
+                print("index quartile difference: \(iqCount)");
+
+                sum += Double(value)*iqCount
+
+                //add any fractional value to the sum
+                
+                foundLowerBound = true
+                continue
+            }
+            
+            //ignore the values in the q1 and q4
+            if iterationIndex <= lowerBound || iterationIndex > upperBound {
+                print("ignored: \(value)"); continue }
+            
+            //if the value not at the ends of the interquartile, just add them to the sum
+            sum +=  Double(value)
+            
+            print(value)
+        }
+        
+        
+        return Double(sum) / (qSize * 2.0)
+    }
+    
+    func calculateFromDict() -> Double {
+        let sum = 0.0
+        
+        let sorted = dictMap.sorted { $0.key < $1.key }
+        
+        print(sorted)
+        
+        return sum
+    }
+    
+    func addToHashMap(value: Int) {
+        hashMap[value] += 1
+        
+        dictMap[value] = (dictMap[value] ?? 0) + 1
+    }
 }

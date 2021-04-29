@@ -15,11 +15,13 @@ class ViewController: UIViewController {
         guard let calculator = try? IIQMCalculator(filename: "data-20k")
         else { showDataFailureAlert(); return }
         
-        calculator.arrayExtension()
+   //     calculator.calculateFromHashMap()
+       // calculator.arrayExtension()
 //        calculator.progressiveSum()
         
         //deprecated method
-//        IIQM().calculate(path: "data-20k")
+//        let iiqm = IIQM()
+//         iiqm.calculate(path: Bundle.main.path(forResource: "data-20k", ofType: "txt")!)
     }
     
     func showDataFailureAlert() {

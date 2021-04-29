@@ -24,9 +24,10 @@ import Foundation
 @available(*, deprecated, message: "Use IIQMCalculator instead")
 class IIQM {
     @available(*, deprecated, message: "Use Array<Double>.interquartileMean() instead")
-    func calculate(path: String) {
+    func calculate(path: String) -> Double {
         let lines = readFile(path: path)
         var data: [Int] = []
+        var mean: Double = 0.0
         for line in lines {
             let value: Int = Int(line)!
             data.append(value)
@@ -54,11 +55,12 @@ class IIQM {
                     j += 1
                 }
                 
-                let mean: Double = (Double(sum) + Double(ys.first! + ys.last!) * factor) / (2.0 * q)
+                mean = (Double(sum) + Double(ys.first! + ys.last!) * factor) / (2.0 * q)
                 let meanString = String(format:"%.2f", mean)
                 print("Index => \(data.count), Mean => \(meanString)")
             }
         }
+        return mean
     }
     @available(*, deprecated, message: "Use TextReader().numericValues(from filename) instead")
     func readFile(path: String) -> Array<String> {
